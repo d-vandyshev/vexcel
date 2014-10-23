@@ -49,7 +49,6 @@ func Array2XlsxIo(data [][]string, w io.Writer) (err error) {
 			return err
 		}
 	}
-
 	return
 }
 
@@ -136,16 +135,7 @@ func CoordinateXy2Excel(collomnIndex int, rowIndex int) (output string) {
 			break
 		}
 	}
-	/*
-		for reference,通过下面的代码推导出上面的循环代码
-		if ((x/26-1)/26-1)>=0{
-		    output+=string((x/26-1)/26-1+int('A'))+string((x/26-1)%26+int('A'))+string(x%26+int('A'))
-		}else if (x/26-1)>=0{
-			output+=string(x/26-1+int('A'))+string(x%26+int('A'))
-		}else{
-			output+=string(x+int('A'))
-		}
-	*/
+
 	output += strconv.Itoa(rowIndex+1)
 	return output
 }
@@ -157,7 +147,7 @@ var fixedFileContent = map[string][]byte{
 	"_rels/.rels": []byte(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties" Target="docProps/custom.xml"/></Relationships>`),
 	"docProps/app.xml": []byte(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>WPS Office 个人版</Application><HeadingPairs><vt:vector size="2" baseType="variant"><vt:variant><vt:lpstr>工作表</vt:lpstr></vt:variant><vt:variant><vt:i4>1</vt:i4></vt:variant></vt:vector></HeadingPairs><TitlesOfParts><vt:vector size="1" baseType="lpstr"><vt:lpstr>1</vt:lpstr></vt:vector></TitlesOfParts></Properties>`),
+<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>Microsoft Excel</Application><HeadingPairs><vt:vector size="2" baseType="variant"><vt:variant><vt:lpstr>Листы</vt:lpstr></vt:variant><vt:variant><vt:i4>1</vt:i4></vt:variant></vt:vector></HeadingPairs><TitlesOfParts><vt:vector size="1" baseType="lpstr"><vt:lpstr>Лист1</vt:lpstr></vt:vector></TitlesOfParts></Properties>`),
 	"docProps/core.xml": []byte(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:creator>Administrator</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">2014-04-01T19:29:42Z</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">2014-04-01T19:29:50Z</dcterms:modified></cp:coreProperties>`),
 	"docProps/custom.xml": []byte(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -183,13 +173,12 @@ xmlns:x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main"
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 <dimension ref="A1:{{.MaxPosition}}"/>
 <cols>
-<col min="1" max="1" width="40" customWidth="1"/>
-<col min="2" max="4" width="20" customWidth="1"/>
+<col min="1" max="2" width="40" customWidth="1"/>
+<col min="3" max="4" width="20" customWidth="1"/>
 </cols>
 {{.SheetData}}
 </worksheet>
 `))
-//<cols><col min="1" max="4" width="33" bestFit="1" customWidth="1"/></cols>
 
 type xlsxSharedStringSst struct {
 	XMLName xml.Name             `xml:"sst"`
