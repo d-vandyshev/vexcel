@@ -182,10 +182,11 @@ xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
 xmlns:x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main"
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 <dimension ref="A1:{{.MaxPosition}}"/>
-<cols><col min="1" max="3" width="33" bestFit="1" customWidth="1"/></cols>
+<cols><col min="1" max="4" bestFit="1"/></cols>
 {{.SheetData}}
 </worksheet>
 `))
+//<cols><col min="1" max="4" width="33" bestFit="1" customWidth="1"/></cols>
 
 type xlsxSharedStringSst struct {
 	XMLName xml.Name             `xml:"sst"`
